@@ -5,12 +5,10 @@ include_once 'config.php';
 
 abstract class Json extends Feed
 {
-	protected $apiKey = API_KEY;
-
 	public function __construct(string $url, string $lang, string $other = null)
 	{
 		$this->url = $url;
-		parent::__construct("https://api.themoviedb.org/3/" . $url . "?api_key=" . $this->apiKey . "&language=" . $lang . $other);
+		parent::__construct("https://api.themoviedb.org/3/" . $url . "?api_key=" . API_KEY . "&language=" . $lang . $other);
 	}
 }
 
