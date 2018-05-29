@@ -13,18 +13,18 @@ abstract class Feed{
 		$this->url = $url;
 	}
 
-    protected function getFullUrl(){
-    	return $this->url;
-    }
+	protected function getFullUrl(){
+		return $this->url;
+	}
 
-    protected function addRow(string $title, string $description, array $images, array $genres, string $releaseDate){
-    	$this->returnArray[] = array("title" => $title, 
+	protected function addRow(string $title, string $description, array $images, array $genres, string $releaseDate){
+		$this->returnArray[] = array("title" => $title, 
 								"description" => $description,  
 								"images" => $images,
 								"genres" => $genres,  
 								"releaseDate" => strtotime($releaseDate), 
 								); 
-    }
+	}
 
 	protected function getArray() : array{
 		return $this->returnArray;

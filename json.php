@@ -23,16 +23,16 @@ class JsonMovie extends Json
 		$this->genres = new JsonGenre($lang);
 	}
 
-    public function getData() : array
-    {
-    	$this->getMovies();
-    	if(is_null(parent::getArray()))
-    		return array("chyba"); 
-    	else
-    		return parent::getArray();
-    }
+	public function getData() : array
+	{
+		$this->getMovies();
+		if(is_null(parent::getArray()))
+			return array("chyba"); 
+		else
+			return parent::getArray();
+	}
 
-    private function getMovies(){
+	private function getMovies(){
 		$obj = $this->loadData();
 
 		foreach ($obj->results as $key => $value) {
@@ -44,9 +44,9 @@ class JsonMovie extends Json
 					$this->getGenres($value->genre_ids), 
 					$value->release_date);			
 		}
-    }
+	}
 
-    private function getGenres(array $genres) : array{
+	private function getGenres(array $genres) : array{
 		$returnArray = [];
 		
 		foreach ($genres as $key => $value) {
@@ -54,19 +54,19 @@ class JsonMovie extends Json
 		}
 
 		return $returnArray;
-    }
+	}
 
-    protected function loadData() {
-    	$json = file_get_contents(parent::getFullUrl());
+	protected function loadData() {
+		$json = file_get_contents(parent::getFullUrl());
 		return json_decode($json);
-    }
+	}
 
-    private function findGenre(array $genres, int $id) : string{
-    	$var = array_filter($genres, function($item) use ($id){
-    		return $item['id'] == $id;
-    	});
-    	return current($var)["name"];
-    }
+	private function findGenre(array $genres, int $id) : string{
+		$var = array_filter($genres, function($item) use ($id){
+			return $item['id'] == $id;
+		});
+		return current($var)["name"];
+	}
 }
 
 class JsonGenre extends Json
@@ -87,7 +87,7 @@ class JsonGenre extends Json
 	}
 
 	protected function loadData(){
-    	$json = file_get_contents(parent::getFullUrl());
+		$json = file_get_contents(parent::getFullUrl());
 		$obj = json_decode($json, true);
 
 		return $obj["genres"];
