@@ -9,6 +9,11 @@ abstract class Json extends Feed
 	{
 		parent::__construct("https://api.themoviedb.org/3/" . $url . "?api_key=" . API_KEY . "&language=" . $lang . $other);
 	}
+
+	protected function loadData() {
+		$json = file_get_contents(parent::getFullUrl());
+		return json_decode($json);
+	}
 }
 
 
@@ -32,7 +37,7 @@ class JsonMovie extends Json
 	}
 
 	private function getMovies(){
-		$obj = $this->loadData();
+		$obj = parent::loadData();
 
 		foreach ($obj->results as $key => $value) {
 			$images = array($value->poster_path, $value->backdrop_path);
@@ -55,16 +60,11 @@ class JsonMovie extends Json
 		return $returnArray;
 	}
 
-	protected function loadData() {
-		$json = file_get_contents(parent::getFullUrl());
-		return json_decode($json);
-	}
-
 	private function findGenre(array $genres, int $id) : string{
 		$var = array_filter($genres, function($item) use ($id){
-			return $item['id'] == $id;
+			return $item->id == $id;
 		});
-		return current($var)["name"];
+		return current($var)->name;
 	}
 }
 
@@ -75,7 +75,7 @@ class JsonGenre extends Json
 	public function __construct(string $lang = "en-US")
 	{
 		parent::__construct("genre/movie/list", $lang);
-		$this->data = $this->loadData();
+		$this->data = parent::loadData()->genres;
 	}
 
 	public function getData() : array{
@@ -83,12 +83,5 @@ class JsonGenre extends Json
 			return array("chyba"); 
 		else
 			return $this->data;
-	}
-
-	protected function loadData(){
-		$json = file_get_contents(parent::getFullUrl());
-		$obj = json_decode($json, true);
-
-		return $obj["genres"];
 	}
 }
