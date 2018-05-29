@@ -4,7 +4,7 @@ include_once 'json.php';
 include_once 'mrss.php';
 
 $myFeed;
-$myFeed = new JsonMovie();/*
+
 switch ($argv[1]) {
 	case 'json':
 		if(array_key_exists(3, $argv)) {
@@ -25,7 +25,7 @@ switch ($argv[1]) {
 		echo "chyba";
 		return;
 }
-*/
+
 header('Content-Type: application/json');
 try {
 	echo json_encode($myFeed->getData());
