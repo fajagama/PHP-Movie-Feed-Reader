@@ -4,6 +4,8 @@ Jedná se o jednoduchou aplikaci, založenou na čtení feedu ve formátu json a
 ```json
 "php": ">=7.1.0",
 ```
+# Instalace
+- vytvoření konfiguračního souboru ze souboru config.example.php
 # Příklad spouštění pomocí PHP CLI server
 Pro MRSS.
 ```
