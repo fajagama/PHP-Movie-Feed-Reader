@@ -7,7 +7,6 @@ abstract class Json extends Feed
 {
 	public function __construct(string $url, string $lang, string $other = null)
 	{
-		$this->url = $url;
 		parent::__construct("https://api.themoviedb.org/3/" . $url . "?api_key=" . API_KEY . "&language=" . $lang . $other);
 	}
 }
